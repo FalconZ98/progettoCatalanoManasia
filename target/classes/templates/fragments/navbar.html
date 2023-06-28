@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Navbar</title>
+</head>
+<body>
+<nav th:fragment="nav" id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+  <div sec:authorize="${hasAnyRole('ROLE_ADMIN')}">
+    <h1 class="intestazione">Admin</h1>
+  </div>
+  <div sec:authorize="${hasAnyRole('ROLE_MERCHANT')}">
+    <h1 th:text ="${#authentication.getPrincipal().getUser().getStore().getName()}"></h1>
+  </div>
+  <div class="position-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a th:class='nav-link'  aria-current="page" th:href="${path}">
+          <span data-feather="home"></span>
+          Home
+        </a>
+      </li>
+      <li class="nav-item">
+        <a th:class='nav-link' id="dashboard-li" th:href="${path} + 'dashboard'">
+          <span data-feather="clipboard"></span>
+          Dashboard
+        </a>
+      </li>
+    </ul>
+    <h6 sec:authorize="hasAnyRole('ROLE_ADMIN')" class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>Sezione dell'admin</span>
+    </h6>
+    <ul sec:authorize="hasAnyRole('ROLE_ADMIN')" class="nav flex-column mb-2">
+      <li class="nav-item">
+        <a id="store-new-li" class="nav-link" th:href="${path} + 'store/new'">
+          <span data-feather="plus-circle"></span>
+          Nuovo negozio
+        </a>
+      </li>
+      <li class="nav-item">
+        <a id="store-delete-li" class="nav-link" th:href="${path} + 'store/delete'">
+          <span data-feather="trash-2"></span>
+          Cancella negozio
+        </a>
+      </li>
+      <li class="nav-item">
+        <a id="merchant-new-li" class="nav-link" th:href="${path} + 'merchant/new'">
+          <span data-feather="plus-circle"></span>
+          Nuovo negoziante
+        </a>
+      </li>
+      <li class="nav-item">
+        <a id="merchant-list-li" class="nav-link" th:href="${path} + 'merchant/list'">
+          <span data-feather="list"></span>
+          Lista negozianti
+        </a>
+      </li>
+    </ul>
+    <h6 sec:authorize="hasAnyRole('ROLE_MERCHANT')" class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>Clienti</span>
+    </h6>
+    <ul sec:authorize="hasAnyRole('ROLE_MERCHANT')" class="nav flex-column mb-2">
+      <li class="nav-item">
+        <a id="customer-new-li" class="nav-link" th:href="${path} + 'customer/new'">
+          <span data-feather="plus-circle"></span>
+          Nuovo cliente
+        </a>
+      </li>
+      <li class="nav-item">
+        <a id="customer-list-li" class="nav-link" th:href="${path} + 'customer/list'">
+          <span data-feather="list"></span>
+          Lista clienti
+        </a>
+      </li>
+    </ul>
+    <h6 sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MERCHANT')" class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>Carte</span>
+    </h6>
+    <ul sec:authorize="hasAnyRole('ROLE_ADMIN')" class="nav flex-column mb-2">
+      <li class="nav-item">
+        <a class="nav-link" id="credit-card-new-li" th:href="${path} + 'credit-card/new'">
+          <span data-feather="plus-circle"></span>
+          Crea nuova Carta
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="credit-card-block-li" th:href="${path} + 'credit-card/block'">
+          <span data-feather="x-octagon"></span>
+          Blocca carta
+        </a>
+      </li>
+    </ul>
+    <ul sec:authorize="hasAnyRole('ROLE_MERCHANT')" class="nav flex-column mb-2">
+      <li class="nav-item">
+        <a class="nav-link" id="credit-card-list-li" th:href="${path} + 'credit-card/list'">
+          <span data-feather="list"></span>
+          Lista carte
+        </a>
+      </li>
+    </ul>
+    <hr>
+    <ul class="nav flex-column mb-2">
+      <li class="nav-item">
+        <form th:action="@{/logout}" method="POST">
+          <input type="submit" class="btn btn-primary" id="myButton" value="Logout">
+        </form>
+        </input>
+      </li>
+    </ul>
+  </div>
+</nav>
+</body>
+</html>

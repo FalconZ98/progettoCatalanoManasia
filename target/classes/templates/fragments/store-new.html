@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crea un Nuovo Negozio</title>
+</head>
+<body>
+<div th:fragment="store-new">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="mx-auto">Crea un Nuovo Negozio</h1>
+  </div>
+  <form class="needs-validation" id="credit-card-new-form" action="#" th:action="@{/store/api/new}" th:object="${store}" method="POST">
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8">
+        <label for="name" class="form-label">Negozio</label>
+        <input name="name" type="text" class="form-control" id="name" required th:field="*{name}">
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+
+    <div class="text-center my-4">
+      <input class="w-25 btn btn-primary btn-lg text-center" type="submit" value="Crea">
+    </div>
+  </form>
+</div>
+</body>
+</html>

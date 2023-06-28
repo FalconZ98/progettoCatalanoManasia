@@ -1,0 +1,231 @@
+body {
+    
+    font-size: .875rem  !important;
+    background-color: #252b30  !important ;  /* Background color nero */
+    color: mediumpurple !important;
+}
+
+.text-center{
+    font-size: .875rem  !important;
+    background-color: #252b30  !important ;  /* Background color nero */
+    color: #FFFFFF !important; /* Testo bianco */
+}
+.feather {
+    width: 16px;
+    height: 16px;
+    vertical-align: text-bottom;
+}
+
+
+.center {
+    display: flex  !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    min-height: 100vh !important;
+    
+}
+
+
+
+                                     /*colore indici tabella lista negozianti*/
+  
+    .table>:not(caption)>*>* {
+        color:mediumpurple !important;
+    }
+
+    .d-inline-block {
+       
+        color: mediumpurple !important;
+    }
+.container{
+    font-size: .875rem;
+    background-color: #252b30; /* Background color nero */
+    color: #6c757d; /* Testo bianco */
+    justify-content: center;
+}
+
+
+.intestazione{
+    color:#6c757d;
+   left: 6%;
+   position:relative;
+}
+ #myButton{
+    background-color:mediumpurple !important;
+    border: none;
+    left: 6%;
+    position:relative;
+ }
+.sidebar {
+    position: fixed;
+    top: 0;
+    /* rtl:raw:
+    right: 0;
+    */
+    bottom: 0;
+    /* rtl:remove */
+    left: 0;
+    z-index: 100; /* Behind the navbar */
+    padding: 48px 0 0; /* Height of navbar */
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.btn{
+    background-color: mediumpurple !important;
+    color: white !important;
+    border: none !important;
+}
+
+@media (max-width: 767.98px) {
+    .sidebar {
+        top: 5rem;
+        
+    }
+}
+
+.sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+.sidebar .nav-link {
+    font-weight: 500;
+    color: mediumpurple;
+}
+.sidebar .nav-link:hover {
+    font-weight: 500;
+    color: #e33ea5;
+}
+
+.sidebar .nav-link .feather {
+    margin-right: 4px;
+    color: #e33ea5;
+}
+
+.nav-link:focus, .nav-link:hover {
+    color: #e33ea5;
+}
+
+.sidebar .nav-link.active {
+    color: #e33ea5;
+}
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+    color: inherit;
+}
+
+.sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+}
+
+/*
+ * Navbar
+ */
+
+ 
+.navbar-brand {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, .25);
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+}
+
+.navbar .navbar-toggler {
+    top: .25rem;
+    right: 1rem;
+}
+
+
+
+.navbar .form-control {
+    padding: .75rem 1rem;
+    border-width: 0;
+    border-radius: 0;
+}
+
+
+
+.form-control  {
+
+background-color: black !important;
+
+color: white !important;
+
+border: none !important;
+
+border-radius: 0 !important;
+
+margin: 0 !important;
+
+transition: background-color 0.3s ease !important;
+
+}
+
+
+
+.form-control:focus {
+
+background-color: mediumpurple !important;
+
+box-shadow: none !important;
+
+}
+
+.form-select  {
+
+    background-color: black !important;
+    
+    color: white !important;
+    
+    border: none !important;
+    
+    border-radius: 0 !important;
+    
+    margin: 0 !important;
+    
+    transition: background-color 0.3s ease !important;
+    
+    }
+    
+    
+    
+    .form-select:focus,
+    .form-select:hover {
+      background-color: mediumpurple !important;
+      color: #FFFFFF !important;
+    }
+
+    .form-select option:checked {
+        background-color: mediumpurple !important;
+        color: white !important;
+      }
+
+
+
+.card {
+    flex: 0 0 40%;
+}
+
+
+.bind-credit-card:hover {
+    cursor: pointer;
+}
+
+.submit-button {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+}
+
+.card{
+    background: none;
+}
+

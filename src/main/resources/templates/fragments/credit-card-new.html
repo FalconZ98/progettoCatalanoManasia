@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crea nuova carta</title>
+</head>
+<body>
+  <div th:fragment="credit-card-new" class="center">
+      <h1 class="mb-5">Crea nuova carta</h1>
+      <form autocomplete="off" class="needs-validation" id="credit-card-new-form" action="#" th:action="@{/credit-card/api/new}" th:object="${creditCard}" method="POST">
+          <div class="form-group">
+              <label for="number" class="form-label">Numero carta</label>
+              <input name="number" type="text" class="form-control form-control-lg" id="number" required th:field="*{number}">
+          </div>
+          <div class="form-group">
+              <label for="balance" class="form-label">Credito</label>
+              <input name="balance" type="number" class="form-control form-control-lg" id="balance" placeholder="" value="0" min="10" step="5" th:field="*{balance}" required>
+          </div>
+          <div class="form-group">
+              <label for="store" class="form-label">Negozio</label>
+              <select name="store" class="form-select form-control-lg" id="store" required th:field="*{store}">
+                  <option value="" selected>Scegli ...</option>
+                  <option th:each="s : ${stores}" th:value="${s.value}" th:text="${s.label}"></option>
+              </select>
+          </div>
+          <!-- Aggiungi altri campi del form qui -->
+          <div class="text-center my-4">
+              <input class="w-25 btn btn-primary btn-lg text-center "type="submit"  value="Submit">
+          </div>
+      </form>
+  </div>
+  </body>
+  </html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cancella Negozio</title>
+</head>
+<body>
+<div th:fragment="store-delete">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="mx-auto">Cancella Negozio</h1>
+  </div>
+  <form class="needs-validation" id="credit-card-delete-form" action="#" th:action="@{/store/api/delete}" method="POST">
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8">
+        <label for="id" class="form-label">Negozio</label>
+        <select name="id" class="form-select" id="id" placeholder="" value="" required>
+          <option value="" selected>Scegli un Negozio</option>
+          <option th:each="s : ${stores}" th:value="${s.value}" th:text="${s.label}"></option>
+        </select>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+
+    <div class="text-center my-4">
+      <input class="w-25 btn btn-primary btn-lg text-center" type="submit" value="Cancella">
+    </div>
+  </form>
+</div>
+</body>
+</html>

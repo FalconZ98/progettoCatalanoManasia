@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Negozianti</title>
+</head>
+<body>
+<main th:fragment="merchants-list" class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="mx-auto">Lista Negozianti</h1>
+  </div>
+  <div id="merchant-list-container" class="d-flex justify-content-evenly flex-wrap">
+      <div class="input-group">
+          <input class="form-control" id="merchantFilter" type="text" placeholder="Cerca negoziante per id o username o email o nome o cognome">
+      </div>
+      <table class="table table-hover">
+          <thead>
+          <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Cognome</th>
+              <th scope="col">Username</th>
+              <th scope="col">Email</th>
+              <th scope="col">Negozio</th>
+              <th scope="col">Abilita</th>
+              <th scope="col">Azioni</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="merchant-row" th:each="m : ${merchants}">
+              <th class="merchant-id" scope="row" th:text="${m.id}"></th>
+              <td class="merchant-firstName" th:text="${m.firstName}"></td>
+              <td class="merchant-lastName" th:text="${m.lastName}"></td>
+              <td class="merchant-username" th:text="${m.username}"></td>
+              <td class="merchant-email" th:text="${m.email}"></td>
+              <td class="merchant-store" th:text="${m.store}"></td>
+              <td class="merchant-enabled" th:text="${m.enabled}"></td>
+              <td>
+                  <a th:href="'/api/merchant/disable?id=' + ${m.id}"><span class="d-inline-block table-action" data-feather="check" th:if="${m.enabled == 'Yes'}" ></span></a>
+                  <a th:href="'/api/merchant/enable?id=' + ${m.id}"><span class="d-inline-block table-action" data-feather="x" th:unless="${m.enabled == 'Yes'}"></span></a>
+                  <a th:href="'/api/merchant/delete?id=' + ${m.id}"><span class="d-inline-block table-action" data-feather="trash-2" ></span></a>
+              </td>
+          </tr>
+          </tbody>
+      </table>
+  </div>
+</main>
+</body>
+</html>

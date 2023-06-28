@@ -1,0 +1,50 @@
+<!doctype html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nuovo Negoziante</title>
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link th:href="${css} + dashboard.css" rel="stylesheet">
+    <link th:href="${css} + backend.css" rel="stylesheet">
+    <link th:href="${css} + bootstrap.min.css" rel="stylesheet" >
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav th:replace="fragments/navbar.html :: nav"></nav>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div th:replace="fragments/merchant-new.html :: merchant-new" ></div>
+        </main>
+    </div>
+</div>
+<script th:inline="javascript">
+    const page = /*[[${page}]]*/ ""
+</script>
+<script th:src="${js} + jquery-3.7.0.min.js"></script>
+<script th:src="${js} + backend.js">
+</script>
+<script th:src="${js} + bootstrap.min.js"></script>
+<script src="https://unpkg.com/feather-icons"></script>
+<script>
+    feather.replace()
+</script>
+<div th:replace="fragments/msg-script :: msg-script"></div>
+
+</body>
+</html>

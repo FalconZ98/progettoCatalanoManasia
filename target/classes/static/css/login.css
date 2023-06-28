@@ -1,0 +1,46 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #252b30 !important;
+
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+
+.form-signin .checkbox {
+    font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.btn{
+    background-color: mediumvioletred !important;
+    color: white !important;
+    border: none !important;
+}
+
+.form-control{
+    background-color: black !important;
+    color: white !important;
+    border-radius: 0 !important;
+    border: none !important;
+    margin-bottom: 5%;
+}
+
+label{
+    color: white;
+}

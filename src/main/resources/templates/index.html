@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css} ">
+    <link th:href="${css} + dashboard.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <title>Home</title>
+
+    <style>
+        .logo{
+            width: 10%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .container{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+        <a href="/" >
+            <img class="logo" src="/assets/logo.png" alt="Logo">
+        </a>
+</div>
+<div class="px-4 py-5 my-5 text-center">
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4 fs-2"><strong>Il tuo software per la gestione delle carte</strong></p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a th:href="@{/dashboard} " class="btn btn-primary btn-lg px-4 gap-3">Area riservata</a>
+            <button id="check-balance-btn" type="button" class="btn btn-outline-secondary btn-lg px-4">Controlla credito</button>
+        </div>
+    </div>
+</div>
+<div id="credit-card-div" style="display: none" class="px-4 py-5 my-5 text-center">
+    <div class="col-lg-6 mx-auto">
+        <form method="POST" th:action="@{/balance}">
+            <input type="text" class="form-control" placeholder="Card number" name="number" id="number" aria-label="Card number">
+        </form>
+    </div>
+</div>
+<div th:if="${param.err != null}" th:text="'Carta non trovata!'" id="credit-card-response-err" class="col-lg-3 text-center mx-auto my-4 alert alert-danger" ></div>
+<div th:if="${balance != null}" th:text="'Credito: ' + ${balance} + '€'" id="credit-card-response-succ"  class="col-lg-3 text-center mx-auto my-4 alert alert-primary" ></div>
+</body>
+<script th:src="${js} +jquery-3.7.0.min.js"></script>
+<script th:src="${js} + bootstrap.min.js"></script>
+<script th:src="${js} + index.js"></script>
+</html>
