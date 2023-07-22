@@ -8,7 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-
+/*Nel codice fornito, la classe AppService è annotata con @Service, il che significa che è un componente di servizio. 
+    La classe contiene variabili di istanza che sono annotate con @Autowired, il che significa che Spring inietterà 
+    automaticamente le dipendenze necessarie quando viene creato un'istanza della classe. Inoltre, la classe è annotata 
+    con @Transactional, il che significa che tutti i metodi della classe sono transazionali. 
+L'annotazione @Transactional viene utilizzata per indicare che un metodo o una classe deve essere eseguito all'interno di una transazione.
+Quando un metodo o una classe viene annotato con @Transactional, Spring gestisce automaticamente l'inizio e la fine della 
+transazione. Inoltre, Spring gestisce anche il rollback della transazione in caso di eccezioni non gestite.
+    */
 @Service
 @Getter
 @Transactional
