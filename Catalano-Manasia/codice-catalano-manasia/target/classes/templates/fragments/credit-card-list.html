@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista carte</title>
+</head>
+<body>
+<main th:fragment="credit-card-list" class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1>Lista carte</h1>
+    </div>
+    <div id="customer-list-container" class="d-flex justify-content-evenly flex-wrap">
+        <div class="w-25">
+            <input class="form-control" id="creditCardFilter" type="text" placeholder="Cerca per username o numero">
+        </div>
+        <div class="w-25">
+            <input class="form-control" id="balanceUpCardFilter" type="text" placeholder="Cerca per importo superiore ad inserito">
+        </div>
+        <div class="w-25">
+            <input class="form-control" id="balanceDownCardFilter" type="text" placeholder="Cerca per importo inferiore ad inserito">
+        </div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Numero</th>
+                <th scope="col">Credito</th>
+                <th scope="col">Proprietario</th>
+                <th scope="col">Email</th>
+                <th scope="col">Attiva</th>
+                <th scope="col">Azioni</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="credit-card-row" th:each="c : ${creditCards}">
+                <th scope="row" th:text="${c.id}"></th>
+                <td class="credit-card-number" th:text="${c.number}"></td>
+                <td class="credit-card-balance" th:text="${c.balance} + ' €'"></td>
+                <td class="owner-username" th:text="${c.owner}"></td>
+                <td th:text="${c.email}"></td>
+                <td class="credit-card-enabled" th:text="${c.enabled}"></td>
+                <td>
+                    <a th:if="${c.enabled == 'Yes'}" class="modal-btn" onclick="setModal('recharge',this)" th:credit-card-id="${c.id}" th:credit-card-balance="${c.balance}" type="button" data-bs-toggle="modal" data-bs-target="#rechargeModal">
+                        <span class="d-inline-block table-action" data-feather="arrow-up"></span>
+                    </a>
+                     -
+                    <a th:if="${c.enabled == 'Yes'}" class="modal-btn" onclick="setModal('purchase',this)" th:credit-card-id="${c.id}" th:credit-card-balance="${c.balance}" type="button" data-bs-toggle="modal" data-bs-target="#purchaseModal">
+                        <span class="d-inline-block table-action" data-feather="arrow-down"></span>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <form method="post" th:action="@{/credit-card/api/recharge-card}">
+        <div class="modal fade" id="rechargeModal" tabindex="-1" aria-labelledby="rechargeModal" aria-hidden="true">
+            <div class="modal-dialog bg-dark">
+                <div class="modal-content bg-dark">
+                    <div class="modal-header bg-dark">
+                        <h5 class="modal-title" id="rechargeModalLabel">Ricarica</h5>
+                    </div>
+                    <div class="modal-body bg-dark">
+                        <div class="row">
+                            <div class="col-md">
+                                <label for="rechargeAmount" class="mb-2">Importo (Credito attuale: <span id="rechargeBalance"></span> €)</label>
+                                <span>
+                                <input type="number" data-bs-input id="rechargeAmount" class="form-control" name="rechargeAmount" value="0" min="10" max="1000" step="10" />
+                              </span>
+                            </div>
+                        </div>
+                        <input type="hidden" id="rechargeCreditCardId" name="rechargeCreditCardId" value="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                        <button type="submit" class="btn btn-primary">Salva</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form method="post" th:action="@{/credit-card/api/charge-card}">
+        <div class="modal fade" id="purchaseModal" tabindex="-1" aria-labelledby="purchaseModalLabel" aria-hidden="true">
+            <div class="modal-dialog bg-dark">
+                <div class="modal-content bg-dark">
+                    <div class="modal-header bg-dark">
+                        <h1 class="modal-title fs-5" id="purchaseModalLabel">Pagamento</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-dark">
+                        <div class="row">
+                            <div class="col-md">
+                                <label for="purchaseAmount" class="mb-2">Importo (Credito attuale: <span id="purchaseBalance"></span> €)</label>
+                                <span>
+                                <input type="number" data-bs-input id="purchaseAmount" class="form-control purchase-max" name="purchaseAmount" value="0" min="5" step="5" />
+                              </span>
+                            </div>
+                        </div>
+                        <input type="hidden" id="purchaseCreditCardId" name="purchaseCreditCardId" value="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                        <button type="submit" class="btn btn-primary">Salva</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+</body>
+</html>

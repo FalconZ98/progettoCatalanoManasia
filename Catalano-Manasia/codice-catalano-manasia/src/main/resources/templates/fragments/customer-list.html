@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Clienti</title>
+</head>
+<body>
+<main th:fragment="customer-list" class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="mx-auto">Lista clienti</h1>
+  </div>
+    <form method="post" th:action="@{/api/customer/bind-credit-card}">
+        <input class="form-control-sm" type="hidden" id="userId" name="userId" value="">
+        <div class="modal fade" id="creditCardModal" tabindex="-1" aria-labelledby="creditCardModal" aria-hidden="true">
+            <div class="modal-dialog bg-dark">
+                <div class="modal-content bg-dark">
+                    <div class="modal-header bg-dark">
+                        <h5 class="modal-title" id="exampleModalLabel">Assegna una carta a questo Cliente
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <select name="creditCardId" class="form-select" id="creditCardId" placeholder="" value="" required>
+                            <option value="" selected>Scegli una carta</option>
+                            <option th:each="c : ${creditCards}" th:value="${c.value}" th:text="${c.label}"></option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Salva</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+  <div id="customer-list-container" class="d-flex justify-content-evenly flex-wrap">
+              <div class="input-group">
+                  <input class="form-control" id="customerFilter" type="text" placeholder="Cerca cliente per id o username o email o nome o cognome">
+              </div>
+      <table class="table table-hover">
+          <thead>
+          <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Cognome</th>
+              <th scope="col">Username</th>
+              <th scope="col">Email</th>
+              <th scope="col">Stato</th>
+              <th scope="col">Azioni</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="customer-row" th:each="c : ${customers}">
+              <th class="customer-id" scope="row" th:text="${c.id}"></th>
+              <td class="customer-firstName" th:text="${c.firstName}"></td>
+              <td class="customer-lastName" th:text="${c.lastName}"></td>
+              <td class="customer-username" th:text="${c.username}"></td>
+              <td class="customer-email" th:text="${c.email}"></td>
+              <td th:text="${c.enabled}"></td>
+              <td>
+                  <a th:href="'/api/customer/disable?id=' + ${c.id}"><span class="d-inline-block table-action" data-feather="check" th:if="${c.enabled == 'Yes'}" >Disabilita</span></a>
+                  <a th:href="'/api/customer/enable?id=' + ${c.id}"><span class="d-inline-block table-action" data-feather="x" th:unless="${c.enabled == 'Yes'}">Abilità</span></a>
+                  <a th:if="${c.enabled == 'Yes'}" class="modal-btn" onclick="openModal(this)" th:customer-id="${c.id}" type="button" data-bs-toggle="modal" data-bs-target="#creditCardModal">
+                      <span class="d-inline-block table-action" data-feather="credit-card"></span>
+                  </a>
+                  <a th:href="'/api/customer/delete?id=' + ${c.id}"><span class="d-inline-block table-action" data-feather="trash" >Cancella</span></a>
+              </td>
+          </tr>
+          </tbody>
+      </table>
+  </div>
+</main>
+</body>
+</html>

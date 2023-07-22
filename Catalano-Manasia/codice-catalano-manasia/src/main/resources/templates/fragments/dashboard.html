@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+<main th:fragment="transactions" class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+        <h1 class="titolo">Operazioni</h1>
+    </div>
+    <div id="transaction-list-container" class="d-flex justify-content-evenly flex-wrap">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Tipo</th>
+                <th sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MERCHANT')" scope="col">Clienti</th>
+                <th sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER')" scope="col">Negozio</th>
+                <th scope="col">Importo</th>
+                <th scope="col">Data</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="t : ${transactions}">
+                <th scope="row" th:text="${t.id}"></th>
+                <td th:text="${t.type}"></td>
+                <td sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MERCHANT')" th:text="${t.customer}"></td>
+                <td sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER')" th:text="${t.store}"></td>
+                <td th:text="${t.type == 'PURCHASE' ? ('-' + t.amount + '€') : ('+' + t.amount + '€')}"></td>
+                <td th:text="${t.time}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

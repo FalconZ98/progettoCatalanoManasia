@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Nuovo Cliente</title>
+</head>
+<body>
+<div th:fragment="customer-new">
+  <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div>
+        <h1>Crea un nuovo Cliente</h1>
+      <div class="card-body">
+        <form class="needs-validation" id="customer-new-form" action="#" th:action="@{/api/customer/new}" th:object="${customer}" method="POST">
+          <div class="row">
+            <div class="col-sm-6">
+              <label for="firstname" class="form-label">Nome</label>
+              <input name="firstname" type="text" class="form-control" id="firstname" required th:field="*{firstName}">
+            </div>
+            <div class="col-sm-6">
+              <label for="lastname" class="form-label">Cognome</label>
+              <input name="lastname" type="text" class="form-control" id="lastname" required th:field="*{lastName}">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-sm-6">
+              <label for="email" class="form-label">E-mail</label>
+              <input name="email" type="email" class="form-control" id="email" required th:field="*{email}">
+            </div>
+            <div class="col-sm-6">
+              <label for="username" class="form-label">Username</label>
+              <input name="username" type="text" class="form-control" id="username" required th:field="*{username}">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-sm-12">
+              <label for="password" class="form-label">Password</label>
+              <input name="password" minlength="3" maxlength="12" type="password" class="form-control" id="password" required th:field="*{password}">
+            </div>
+          </div>
+          <div class="text-center mt-4">
+            <input class="btn" type="submit" value="Crea">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Blocca Carte di Credito</title>
+</head>
+<body>
+<div th:fragment="credit-card-block"  class="center">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="mx-auto">Disabilita / Abilita Carta</h1>
+  </div>
+  <form class="needs-validation" id="credit-card-block-form" action="#" th:action="@{/credit-card/api/block}" method="POST">
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-4">
+        <label for="number" class="form-label">Numero Carta</label>
+        <input name="number" type="text" class="form-control" id="number" required>
+      </div>
+      <div class="col-sm-4">
+        <label for="enable" class="form-label">Operazione</label>
+        <select name="enable" class="form-select" id="enable" placeholder="" value="" required>
+          <option value="" selected>Scegli Operazione</option>
+          <option value="1">Abilita</option>
+          <option value="0">Disabilita</option>
+        </select>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+    <div class="text-center my-4">
+      <input class="w-25 btn btn-primary btn-lg text-center" type="submit" value="Esegui">
+    </div>
+  </form>
+</div>
+</body>
+</html>
