@@ -26,3 +26,10 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new CustomUserDetails(user);
     }
 }
+
+/*L'utilizzo di UserDetailsService e UserDetails è comune in Spring Security per recuperare le informazioni sull'utente 
+    dal database e utilizzarle per l'autenticazione e l'autorizzazione all'interno dell'applicazione.
+Si noti che il codice fornito non mostra come vengono gestite le autorizzazioni dell'utente o come viene gestita 
+    l'autenticazione nel contesto dell'applicazione. Questo dipenderà dall'implementazione specifica dell'applicazione e 
+    dalla logica di business associata.
+    */
