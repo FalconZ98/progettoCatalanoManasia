@@ -19,10 +19,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CustomSuccessHandler implements AuthenticationSuccessHandler {
+
+    // Utilizziamo un logger per registrare gli eventi di questa classe
     protected Log logger = LogFactory.getLog(this.getClass());
 
+    // Definiamo la strategia di reindirizzamento predefinita per gestire i reindirizzamenti
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
+    // Questo metodo viene chiamato quando l'autenticazione ha avuto successo
     @Override
     public void onAuthenticationSuccess(
             HttpServletRequest request,
@@ -30,18 +34,25 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
             Authentication authentication)
             throws IOException {
 
+        // Chiamiamo il metodo 'handle' per gestire l'autenticazione con successo
         handle(request, response, authentication);
+
+        // Chiamiamo il metodo 'clearAuthenticationAttributes' per rimuovere eventuali attributi di autenticazione residui
+        // dalla sessione
         clearAuthenticationAttributes(request);
     }
 
+    // Questo metodo gestisce il reindirizzamento dopo un'effettuata autenticazione con successo
     protected void handle(
             HttpServletRequest request,
             HttpServletResponse response,
             Authentication authentication
     ) throws IOException {
 
+        // Determiniamo l'URL target in base al ruolo dell'utente autenticato
         String targetUrl = determineTargetUrl(authentication);
 
+        // Se la risposta HTTP è già stata commessa, non possiamo effettuare il reindirizzamento
         if (response.isCommitted()) {
             logger.debug(
                     "Response has already been committed. Unable to redirect to "
@@ -49,31 +60,44 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
             return;
         }
 
+        // Effettuiamo il reindirizzamento alla pagina target
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 
+    // Questo metodo determina l'URL target in base al ruolo dell'utente autenticato
     protected String determineTargetUrl(final Authentication authentication) {
 
+        // Mappiamo i ruoli con gli URL delle pagine target
         Map<String, String> roleTargetUrlMap = new HashMap<>();
         roleTargetUrlMap.put("ROLE_CUSTOMER", "/dashboard");
         roleTargetUrlMap.put("ROLE_MERCHANT", "/dashboard");
         roleTargetUrlMap.put("ROLE_ADMIN", "/dashboard");
 
+        // Otteniamo gli autorizzazioni dell'utente autenticato
         final Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+
+        // Iteriamo attraverso le autorizzazioni dell'utente e determiniamo l'URL target in base al ruolo
         for (final GrantedAuthority grantedAuthority : authorities) {
             String authorityName = grantedAuthority.getAuthority();
             if(roleTargetUrlMap.containsKey(authorityName)) {
                 return roleTargetUrlMap.get(authorityName);
             }
         }
+
+        // Se il ruolo dell'utente non corrisponde a nessun URL mappato, lanciamo un'eccezione
         throw new IllegalStateException();
     }
 
+    // Questo metodo rimuove gli attributi di autenticazione dalla sessione
     protected void clearAuthenticationAttributes(HttpServletRequest request) {
+        // Otteniamo la sessione corrente. Se non esiste, non dobbiamo fare nulla
         HttpSession session = request.getSession(false);
         if (session == null) {
             return;
         }
+
+        // Rimuoviamo eventuali attributi relativi all'errore di autenticazione dalla sessione
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
     }
 }
+

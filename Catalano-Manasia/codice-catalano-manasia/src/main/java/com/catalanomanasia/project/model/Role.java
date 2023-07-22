@@ -23,8 +23,8 @@ o librerie, come ad esempio JPA (Java Persistence API), che possono istanziare o
 Questo costruttore sarà in grado di inizializzare tutti i campi della classe contemporaneamente.*/
 
 @Entity
-/* Questa annotazione fa parte di JPA e indica che questa classe è una classe di entità che rappresenta una tabella nel database.
-L'entity manager (parte di JPA) gestirà la persistenza degli oggetti di questa classe nel database.*/
+/* L'annotazione @Entity in Java Spring viene utilizzata per specificare che una classe è un'entità.
+ Questa annotazione viene utilizzata nel contesto di Java Persistence API (JPA) per mappare una classe a una tabella nel database*/
 
 @Table(name="roles")
 /*Questa annotazione specifica il nome della tabella nel database che sarà associata a questa classe.
