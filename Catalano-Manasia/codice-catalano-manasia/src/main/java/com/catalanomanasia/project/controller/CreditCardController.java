@@ -69,8 +69,12 @@ public class CreditCardController {
 
         // Itera attraverso i clienti e le loro carte di credito per costruire una lista di informazioni sulle carte di credito.
         for (User u : customerEntityList) {
+            // Ottieni la lista di carte di credito del cliente corrente.
             List<CreditCard> customerCreditCards = this.appService.getCustomerCreditCards(u);
+
+            // Itera attraverso le carte di credito del cliente corrente.
             for (CreditCard c : customerCreditCards) {
+                // Crea una nuova mappa di informazioni sulla carta di credito.
                 HashMap<String, String> creditCardInfo = new HashMap<>();
 
                 // Popola la mappa con le informazioni della carta di credito (id, numero, saldo, proprietario, email, abilitata).
@@ -81,6 +85,7 @@ public class CreditCardController {
                 creditCardInfo.put("email", c.getOwner().getEmail());
                 creditCardInfo.put("enabled", c.getEnabled() == 1 ? "Yes" : "No");
 
+                // Aggiungi la mappa alla lista di carte di credito.
                 creditCards.add(creditCardInfo);
             }
         }

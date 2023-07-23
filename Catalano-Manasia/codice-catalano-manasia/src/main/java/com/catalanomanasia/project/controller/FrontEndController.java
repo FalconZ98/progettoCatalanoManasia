@@ -73,9 +73,19 @@ public class FrontEndController {
     String login(Model model){
         initModel(model);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        /*Authentication auth = SecurityContextHolder.getContext().getAuthentication() recupera l'oggetto Authentication corrente
+        dal contesto di sicurezza. L'oggetto Authentication rappresenta le informazioni di autenticazione dell'utente corrente.*/
         if(auth != null  && !(auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ANONYMOUS")))){
             return "redirect:/dashboard";
         }
+        /*auth != null controlla se l'oggetto Authentication è diverso da null. Se l'oggetto Authentication è null,
+        l'utente non è autenticato.
+
+        auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ANONYMOUS")) utilizza il metodo getAuthorities()
+        per ottenere la lista di autorizzazioni dell'utente corrente. Il metodo stream() restituisce uno stream di autorizzazioni,
+        che viene filtrato utilizzando il metodo anyMatch() per verificare se l'utente ha il ruolo "ROLE_ANONYMOUS".
+
+        return "redirect:/dashboard" reindirizza l'utente alla pagina "/dashboard".*/
         return "login";
     }
 

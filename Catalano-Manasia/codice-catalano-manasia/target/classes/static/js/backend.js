@@ -1,17 +1,31 @@
+//controlla se l'attributo page non è null, se non lo è aggiunge la classe css active e mostra la
+//pagina a schermo
 if(page){
     $("#" + page + "-li").addClass("active")
 }
 
-const openModal = (t) =>{
-    const userId = t.getAttribute("customer-id")
-    $("#userId").val(userId)
+
+// Definizione della funzione openModal che prende come parametro un oggetto t.
+const openModal = (t) => {
+    // Recupera l'attributo "customer-id" dell'oggetto t e lo assegna alla variabile userId.
+    const userId = t.getAttribute("customer-id");
+
+    // Imposta il valore dell'elemento con id "userId" con il valore della variabile userId.
+    $("#userId").val(userId);
 }
 
-const setModal = (modal, t) =>{
+
+const setModal = (modal, t) =>{ //il valore di modal viene passato premendo il pulsante per aprire la modal
+    // Recupera l'attributo "credit-card-id" dell'oggetto t e lo assegna alla variabile creditCardId.
     const creditCardId = t.getAttribute("credit-card-id")
+    // Recupera l'attributo "credit-card-balance" dell'oggetto t e lo assegna alla variabile actualBalance.
     const actualBalance = t.getAttribute("credit-card-balance")
+    // Imposta il valore dell'elemento con id "CreditCardId" con il valore della variabile creditCardId.
     $("#" + modal + "CreditCardId").val(creditCardId)
+    // Imposta il valore dell'elemento con id "purchaseBalance" con il valore della variabile actualBalance.
     $("#" + modal + "Balance").text(actualBalance)
+    // Imposta il valore dell'elemento con id "purchase-max" con il valore della variabile actualBalance e imposta il max dell'input
+    // uguale ad actualBalance per evitare che venga fatto un pagamento maggiore al saldo disponibile.
     $("." + modal + "-max").attr("max",actualBalance)
 }
 

@@ -53,6 +53,9 @@ public class UserController {
 
     // Questo metodo viene utilizzato per inizializzare il modello con gli attributi di percorso ("path"),
     // percorsi per i file CSS ("css"), JS ("js"), risorse (assets) ("assets") e API ("api").
+    /*Il model è un componente architetturale del pattern Model-View-Controller (MVC) utilizzato nello sviluppo di sistemi software.
+      Il model rappresenta la parte dell'applicazione che gestisce i dati e la logica di business. In particolare,
+      il model fornisce i metodi per accedere ai dati utili all'applicazione e si occupa della logica di business.*/
     private void initModel(Model m) {
         m.addAttribute("path", this.path);
         m.addAttribute("css", cssPath);
